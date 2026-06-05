@@ -1,0 +1,794 @@
+/* ============================================================
+   detail.css
+   Styles specific to project-detail.html
+   Builds on top of style.css tokens — no duplication.
+   ============================================================ */
+
+/* ── Page entrance ─────────────────────────────────────────── */
+.detail-page {
+  background: var(--clr-bg);
+}
+
+/* All detail sections start hidden; JS adds .detail-loaded */
+.detail-page .detail-hero,
+.detail-page .detail-content,
+.detail-page .detail-prevnext {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.5s var(--ease-out),
+    transform 0.5s var(--ease-out);
+}
+
+.detail-loaded .detail-hero {
+  opacity: 1; transform: translateY(0);
+  transition-delay: 0.05s;
+}
+.detail-loaded .detail-content {
+  opacity: 1; transform: translateY(0);
+  transition-delay: 0.15s;
+}
+.detail-loaded .detail-prevnext {
+  opacity: 1; transform: translateY(0);
+  transition-delay: 0.25s;
+}
+
+/* ── Top bar: back button + breadcrumb ─────────────────────── */
+.detail-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  padding-block: var(--space-5);
+  margin-top: 64px; /* navbar height */
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--clr-ink-muted);
+  padding: var(--space-2) 0;
+  transition: color var(--dur-fast), gap var(--dur-fast);
+}
+
+.back-btn:hover { color: var(--clr-accent); gap: var(--space-3); }
+
+.back-arrow {
+  display: inline-block;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.back-btn:hover .back-arrow { transform: translateX(-3px); }
+
+/* Breadcrumb */
+.breadcrumb-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--fs-xs);
+  color: var(--clr-ink-faint);
+
+  /* ── THÊM CÁC DÒNG DƯỚI ĐÂY ĐỂ FIX LỖI ── */
+  list-style: none;      /* Xóa bỏ hoàn toàn các số 1., 3. tự động sinh ra */
+  padding: 0;            /* Xóa padding mặc định của thẻ ol */
+  margin: 0;             /* Xóa margin mặc định nếu có */
+}
+
+.breadcrumb-list a {
+  color: var(--clr-ink-muted);
+  transition: color var(--dur-fast);
+}
+.breadcrumb-list a:hover { color: var(--clr-accent); }
+
+.breadcrumb-sep { color: var(--clr-border-dark); }
+
+.breadcrumb-current {
+  color: var(--clr-ink);
+  font-weight: var(--fw-medium);
+  /* truncate long titles */
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Detail Hero ───────────────────────────────────────────── */
+.detail-hero {
+  padding-block: var(--space-12) var(--space-10);
+  border-bottom: 1px solid var(--clr-border);
+  background: linear-gradient(
+    180deg,
+    var(--clr-surface-alt) 0%,
+    var(--clr-bg) 100%
+  );
+}
+
+.detail-hero-inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  max-width: 820px;
+}
+
+/* Number badge */
+.detail-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: var(--clr-ink);
+  color: var(--clr-bg);
+  border-radius: var(--radius-md);
+  font-family: var(--ff-display);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semi);
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+/* Meta row */
+.detail-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--fs-sm);
+  color: var(--clr-ink-muted);
+}
+
+.detail-meta-tag {
+  font-weight: var(--fw-medium);
+  color: var(--clr-accent);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: var(--fs-xs);
+}
+
+.detail-meta-sep { color: var(--clr-border-dark); }
+
+/* Title */
+.detail-title {
+  font-family: var(--ff-display);
+  font-size: clamp(var(--fs-2xl), 5vw, var(--fs-4xl));
+  font-weight: var(--fw-semi);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--clr-ink);
+}
+
+/* Hero image */
+.detail-hero-image {
+  margin-top: var(--space-4);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 16 / 6;
+  background: var(--clr-surface-alt);
+  border: 1px solid var(--clr-border);
+}
+
+.detail-hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.detail-hero-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    135deg,
+    var(--clr-surface-alt) 0%,
+    var(--clr-accent-light) 100%
+  );
+}
+
+.detail-hero-icon { font-size: 4rem; opacity: 0.5; }
+
+/* ── Content grid ──────────────────────────────────────────── */
+.detail-content {
+  padding-block: var(--space-12);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: var(--space-10);
+  align-items: start;
+}
+
+/* ── Main column: sections ─────────────────────────────────── */
+.detail-main-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.detail-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.detail-section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.detail-section-icon { font-size: var(--fs-lg); }
+
+.detail-section-title {
+  font-family: var(--ff-display);
+  font-size: var(--fs-xl);
+  font-weight: var(--fw-semi);
+  color: var(--clr-ink);
+  letter-spacing: -0.01em;
+}
+
+.detail-section-body { padding-left: calc(var(--fs-lg) + var(--space-3)); }
+
+.detail-text {
+  font-size: var(--fs-md);
+  line-height: 1.8;
+  color: var(--clr-ink-muted);
+  font-family: var(--ff-display);
+  font-style: italic;
+  font-weight: var(--fw-light);
+}
+
+/* Outcome placeholder */
+.detail-outcome-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-8);
+  background: var(--clr-surface-alt);
+  border: 1.5px dashed var(--clr-border-dark);
+  border-radius: var(--radius-lg);
+}
+
+.detail-outcome-placeholder .placeholder-icon { font-size: 2rem; }
+
+.detail-outcome-placeholder p {
+  font-size: var(--fs-sm);
+  color: var(--clr-ink-muted);
+  line-height: 1.65;
+}
+
+.btn-disabled {
+  opacity: 0.45;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+/* ── Sidebar ───────────────────────────────────────────────── */
+.detail-sidebar {
+  position: sticky;
+  top: calc(64px + var(--space-6));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.sidebar-card {
+  background: var(--clr-surface);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.sidebar-card-title {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--clr-ink-faint);
+}
+
+/* Info list */
+.sidebar-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.sidebar-info-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.sidebar-info-row dt {
+  font-size: var(--fs-xs);
+  color: var(--clr-ink-faint);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sidebar-info-row dd {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--clr-ink);
+}
+
+/* Status badge */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border-radius: 100px;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+}
+
+.status-badge::before {
+  content: "";
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.status-wip {
+  background: #fef3e2;
+  color: #b45309;
+}
+
+.status-done {
+  background: var(--clr-accent-light);
+  color: var(--clr-accent);
+}
+
+/* Sidebar project nav */
+.sidebar-project-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.sidebar-nav-item { border-radius: var(--radius-md); }
+
+.sidebar-nav-link {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  position: relative;
+  transition: background var(--dur-fast);
+}
+
+.sidebar-nav-link:hover {
+  background: var(--clr-surface-alt);
+}
+
+.sidebar-nav-item.is-current .sidebar-nav-link {
+  background: var(--clr-accent-light);
+}
+
+.sidebar-nav-icon { font-size: var(--fs-base); flex-shrink: 0; margin-top: 1px; }
+
+.sidebar-nav-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0; /* allow truncation */
+}
+
+.sidebar-nav-num {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.08em;
+  color: var(--clr-accent);
+  text-transform: uppercase;
+}
+
+.sidebar-nav-title {
+  font-size: var(--fs-xs);
+  color: var(--clr-ink-muted);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar-nav-item.is-current .sidebar-nav-title {
+  color: var(--clr-ink);
+  font-weight: var(--fw-medium);
+}
+
+.sidebar-nav-dot {
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+}
+
+/* ── Prev / Next ───────────────────────────────────────────── */
+.detail-prevnext {
+  padding-block: var(--space-8) var(--space-16);
+  border-top: 1px solid var(--clr-border);
+  margin-top: var(--space-4);
+}
+
+.prevnext-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.prevnext-link {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-6);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  background: var(--clr-surface);
+  transition:
+    border-color var(--dur-fast),
+    box-shadow var(--dur-fast),
+    transform var(--dur-fast);
+}
+
+.prevnext-link:not(.prevnext-empty):hover {
+  border-color: var(--clr-accent);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.prevnext-next { text-align: right; align-items: flex-end; }
+
+.prevnext-empty {
+  opacity: 0.4;
+  pointer-events: none;
+  cursor: default;
+}
+
+.prevnext-dir {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+}
+
+.prevnext-next .prevnext-dir { justify-content: flex-end; }
+
+.prevnext-title {
+  font-family: var(--ff-display);
+  font-size: var(--fs-md);
+  font-weight: var(--fw-semi);
+  color: var(--clr-ink);
+  line-height: 1.3;
+}
+
+.prevnext-home {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  color: var(--clr-ink-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  transition: color var(--dur-fast), background var(--dur-fast);
+  white-space: nowrap;
+}
+
+.prevnext-home:hover {
+  color: var(--clr-ink);
+  background: var(--clr-surface-alt);
+}
+
+.prevnext-home span { font-size: var(--fs-lg); }
+
+/* ── 404 Not Found ─────────────────────────────────────────── */
+.not-found {
+  min-height: calc(100svh - 64px - 160px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: var(--space-20);
+}
+
+.not-found-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  text-align: center;
+  max-width: 480px;
+}
+
+.not-found-icon { font-size: 4rem; }
+
+.not-found-title {
+  font-family: var(--ff-display);
+  font-size: var(--fs-3xl);
+  font-weight: var(--fw-semi);
+  color: var(--clr-ink);
+}
+
+.not-found-text {
+  font-size: var(--fs-base);
+  color: var(--clr-ink-muted);
+  line-height: 1.7;
+}
+
+.not-found-text code {
+  font-family: monospace;
+  background: var(--clr-surface-alt);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  font-size: 0.9em;
+}
+
+/* ── Card visible state (used by main.js observer) ─────────── */
+.project-card {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.45s var(--ease-out),
+    transform 0.45s var(--ease-out),
+    box-shadow var(--dur-mid),
+    border-color var(--dur-mid);
+  transition-delay: var(--delay, 0ms);
+}
+
+.project-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-sidebar {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .prevnext-inner {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .prevnext-home {
+    grid-column: 1 / -1;
+    order: -1;
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .detail-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .detail-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .prevnext-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .prevnext-next { align-items: flex-start; text-align: left; }
+  .prevnext-next .prevnext-dir { justify-content: flex-start; }
+
+  .prevnext-home { grid-column: 1; }
+
+  .detail-section-body { padding-left: 0; }
+
+  .detail-hero-image { aspect-ratio: 16 / 8; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .detail-page .detail-hero,
+  .detail-page .detail-content,
+  .detail-page .detail-prevnext,
+  .project-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ── CORE ENHANCEMENT: READABILITY & TEXT CONTRAST ── */
+.detail-text,
+.detail-body p,
+.detail-section-body p,
+.detail-section p {
+  font-family: var(--ff-body) !important;       /* Thay font serif Cormorant bằng DM Sans đứng thẳng, nét rõ ràng */
+  font-style: normal !important;                /* Loại bỏ kiểu chữ in nghiêng gây mỏi mắt */
+  font-weight: var(--fw-regular) !important;    /* Độ dày vừa vặn dễ nhìn (400) */
+  color: var(--clr-ink) !important;             /* Màu mực đen ấm đậm đà, tương phản tuyệt đối trên nền kem nhạt */
+  line-height: 1.8 !important;                  /* Tăng khoảng cách dòng giúp điều tiết mắt tốt hơn */
+  font-size: var(--fs-base) !important;         /* Kích thước chữ đạt tỷ lệ chuẩn (1rem) */
+  margin-bottom: var(--space-4);
+}
+
+/* Đảm bảo các danh sách liệt kê (li) cũng rõ nét và đồng bộ font chữ không chân */
+.detail-section-body ul li,
+.detail-section-body ol li,
+.detail-body li {
+  font-family: var(--ff-body) !important;
+  font-style: normal !important;
+  color: var(--clr-ink) !important;
+  line-height: 1.7;
+  margin-bottom: var(--space-2);
+}
+
+/* Tăng độ nổi bật của tiêu đề mục lục để điều hướng tốt hơn */
+.detail-section-title {
+  font-family: var(--ff-display) !important;
+  font-weight: var(--fw-semi) !important;       /* Đẩy độ đậm lên mức 600 */
+  color: var(--clr-ink) !important;
+  letter-spacing: -0.01em;
+}
+
+#detail-process {
+  white-space: pre-line;
+}
+
+/* ============================================================
+   NÂNG CẤP MỤC SẢN PHẨM & KẾT QUẢ SÁNG TẠO (PREMIUM SHOWCASE)
+   ============================================================ */
+.detail-outcome-placeholder {
+  display: flex !important;
+  flex-direction: row !important;      /* Chuyển từ hàng dọc sang hàng ngang rộng rãi */
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: var(--space-6);
+  padding: var(--space-6) var(--space-8) !important;
+  
+  /* Hiệu ứng nền chuyển màu mượt mà kết hợp đổ bóng nhẹ */
+  background: linear-gradient(135deg, var(--clr-surface) 0%, var(--clr-surface-alt) 100%) !important;
+  border: 1px solid var(--clr-border) !important;      /* Bỏ viền đứt nét thô cứng */
+  border-left: 4.5px solid var(--clr-accent) !important; /* Vạch màu nhấn thương hiệu ở cạnh trái */
+  border-radius: var(--radius-lg) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02) !important;
+  
+  /* Cấu hình chuyển động mượt mà khi hover */
+  transition: 
+    transform var(--dur-mid) var(--ease-out), 
+    border-color var(--dur-mid), 
+    box-shadow var(--dur-mid) !important;
+}
+
+/* Hiệu ứng tương tác nhấc bổng thẻ khi di chuột vào */
+.detail-outcome-placeholder:hover {
+  transform: translateY(-4px);
+  border-color: var(--clr-border-dark) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Biến đổi Icon thành một khối nổi bật */
+.detail-outcome-placeholder .placeholder-icon {
+  font-size: 2.2rem !important;
+  background: var(--clr-accent-light); /* Lấy màu nền thương hiệu nhạt */
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tối ưu phần chữ mô tả sản phẩm */
+.detail-outcome-placeholder p {
+  margin-bottom: 0 !important;        /* Triệt tiêu khoảng trống thừa bên dưới */
+  flex-grow: 1;                        /* Đẩy nút bấm về phía bên phải một cách tự động */
+  font-size: var(--fs-md) !important;
+  font-weight: var(--fw-medium) !important;
+  color: var(--clr-ink) !important;
+}
+
+/* Nâng cấp nút "Xem sản phẩm" có chiều sâu */
+#detail-link {
+  white-space: nowrap;                 /* Không cho chữ trên nút bị vỡ thành 2 dòng */
+  flex-shrink: 0;
+  transition: all var(--dur-fast) var(--ease-out);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+#detail-link:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* ── Responsive tương thích hoàn hảo cho điện thoại ── */
+@media (max-width: 640px) {
+  .detail-outcome-placeholder {
+    flex-direction: column !important; /* Điện thoại tự động quay về hàng dọc */
+    align-items: flex-start !important;
+    gap: var(--space-4);
+    padding: var(--space-6) !important;
+  }
+  
+  .detail-outcome-placeholder p {
+    width: 100%;
+  }
+  
+  #detail-link {
+    width: 100%;                       /* Nút bấm trải dài hết màn hình điện thoại cho dễ bấm */
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* ============================================================
+   ĐỔI MÀU TRẠNG THÁI "ĐÃ HOÀN THÀNH" SANG MÀU XANH CÔNG NGHỆ
+   ============================================================ */
+.status-badge.status-done {
+  background-color: #e6f4ea !important; /* Màu nền xanh lá cây nhạt, dịu mắt */
+  color: #137333 !important;            /* Màu chữ xanh lá cây đậm, tương phản tốt */
+  border: 1px solid #ceead6 !important; /* Viền xanh mảnh đồng bộ */
+}
+
+/* ==========================================================================
+   FIX TRIỆT ĐỂ LỖI CO RÚM NÚT "XEM SẢN PHẨM"
+   ========================================================================== */
+
+.detail-outcome-placeholder {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: var(--space-5) !important; /* Tạo khoảng cách thở giữa chữ và nút */
+}
+
+.detail-outcome-placeholder p {
+  flex: 1 !important;        /* Ép đoạn văn chỉ được phép chiếm phần diện tích CÒN LẠI */
+  min-width: 0 !important;    /* Ngăn chặn lỗi tràn text làm vỡ layout Flexbox */
+}
+
+/* Chặn co rút cho tất cả các phần tử bên phải (nút bấm hoặc div bọc ngoài nút nếu có) */
+.detail-outcome-placeholder > *:not(p) {
+  flex-shrink: 0 !important;
+  width: auto !important;
+}
+
+/* Định hình lại nút bấm luôn ở trạng thái chuẩn UI */
+#detail-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  width: auto !important;
+}

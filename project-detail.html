@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chi tiết bài tập | Portfolio</title>
+    <meta name="description" content="Chi tiết bài tập thực hành — Nhập môn Công nghệ số và Ứng dụng Trí tuệ nhân tạo" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/detail.css" />
+  </head>
+
+  <body class="detail-page">
+
+    <!-- ── NAVBAR ── -->
+    <header class="site-header scrolled" id="site-header">
+      <nav class="navbar" aria-label="Điều hướng chính">
+        <a href="index.html" class="nav-logo" aria-label="Về trang chủ">
+          <span class="nav-logo-mark">✦</span>
+          <span class="nav-logo-text">PORTFOLIO</span>
+        </a>
+        <ul class="nav-menu" id="nav-menu" role="list">
+          <li><a href="index.html#home"       class="nav-link">Trang chủ</a></li>
+          <li><a href="index.html#portfolio"  class="nav-link">Bài tập</a></li>
+          <li><a href="index.html#reflection" class="nav-link">Nhật ký học tập</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="detail-main">
+
+      <!-- ── BACK BUTTON + BREADCRUMB ── -->
+      <div class="detail-topbar container">
+        <a href="index.html#portfolio" class="back-btn" id="detail-back-btn">
+          <span class="back-arrow" aria-hidden="true">←</span>
+          Quay lại danh sách
+        </a>
+
+        <!-- Breadcrumb: filled by detailRenderer.js -->
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol class="breadcrumb-list" role="list">
+            <li><a href="index.html">Trang chủ</a></li>
+            <li aria-hidden="true" class="breadcrumb-sep">›</li>
+            <li><a href="index.html#portfolio">Bài tập</a></li>
+            <li aria-hidden="true" class="breadcrumb-sep">›</li>
+            <li class="breadcrumb-current" aria-current="page" id="detail-breadcrumb">
+              Đang tải…
+            </li>
+          </ol>
+        </nav>
+      </div>
+
+      <!-- ── HERO BAND ── -->
+      <section class="detail-hero" aria-labelledby="detail-title">
+        <div class="container">
+          <div class="detail-hero-inner">
+
+            <!-- Number badge -->
+            <div class="detail-badge" id="detail-badge" aria-label="Số bài tập">
+              01
+            </div>
+
+            <!-- Meta row -->
+            <div class="detail-meta">
+              <span class="detail-meta-tag" id="detail-meta-label">Bài tập</span>
+              <span class="detail-meta-sep" aria-hidden="true">·</span>
+              <span class="detail-meta-course">Nhập môn Công nghệ số &amp; AI</span>
+            </div>
+
+            <!-- Title -->
+            <h1 class="detail-title" id="detail-title">
+              Đang tải nội dung…
+            </h1>
+
+            <!-- Hero image -->
+            <div class="detail-hero-image" id="detail-hero-image" aria-hidden="true">
+              <!-- Injected by detailRenderer.js -->
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ── CONTENT BODY ── -->
+      <div class="detail-content container">
+        <div class="detail-grid">
+
+          <!-- LEFT: main content -->
+          <div class="detail-main-col">
+
+            <!-- Objective -->
+            <section
+              class="detail-section"
+              aria-labelledby="heading-objective"
+            >
+              <div class="detail-section-header">
+                <span class="detail-section-icon" aria-hidden="true">🎯</span>
+                <h2 class="detail-section-title" id="heading-objective">
+                  Mục tiêu bài tập
+                </h2>
+              </div>
+              <div class="detail-section-body">
+                <p id="detail-objective" class="detail-text">
+                  Đang tải…
+                </p>
+              </div>
+            </section>
+
+            <!-- Process Summary -->
+            <section
+              class="detail-section"
+              aria-labelledby="heading-process"
+            >
+              <div class="detail-section-header">
+                <span class="detail-section-icon" aria-hidden="true">🔬</span>
+                <h2 class="detail-section-title" id="heading-process">
+                  Tóm tắt quá trình thực hiện
+                </h2>
+              </div>
+              <div class="detail-section-body">
+                <p id="detail-process" class="detail-text">
+                  Đang tải…
+                </p>
+              </div>
+            </section>
+
+            <!-- Outcome / Deliverable placeholder -->
+            <section
+              class="detail-section"
+              aria-labelledby="heading-outcome"
+            >
+              <div class="detail-section-header">
+                <span class="detail-section-icon" aria-hidden="true">📎</span>
+                <h2 class="detail-section-title" id="heading-outcome">
+                  Sản phẩm &amp; kết quả
+                </h2>
+              </div>
+              <div class="detail-section-body">
+                <div class="detail-outcome-placeholder" id="detail-outcome">
+                  <span class="placeholder-icon" aria-hidden="true">📁</span>
+                  <p>Sản phẩm cuối cùng.</p>
+                  <a
+                    href="#"
+                    class="btn btn-primary detail-outcome-link"
+                    id="detail-link"
+                    aria-disabled="true"
+                  >
+                    Xem sản phẩm ↗
+                  </a>
+                </div>
+              </div>
+            </section>
+
+          </div><!-- /detail-main-col -->
+
+          <!-- RIGHT: sidebar info -->
+          <aside class="detail-sidebar" aria-label="Thông tin bài tập">
+
+            <div class="sidebar-card">
+              <h3 class="sidebar-card-title">Thông tin chung</h3>
+              <dl class="sidebar-info-list">
+                <div class="sidebar-info-row">
+                  <dt>Môn học</dt>
+                  <dd>Nhập môn Công nghệ số &amp; AI</dd>
+                </div>
+                <div class="sidebar-info-row">
+                  <dt>Số bài</dt>
+                  <dd id="sidebar-id">—</dd>
+                </div>
+                <div class="sidebar-info-row">
+                  <dt>Trạng thái</dt>
+                  <dd>
+                    <span class="status-badge status-done" id="sidebar-status">
+                      Đã hoàn thành
+                    </span>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+
+            <!-- Navigation between projects -->
+            <div class="sidebar-card sidebar-nav-card">
+              <h3 class="sidebar-card-title">Các bài tập khác</h3>
+              <nav aria-label="Điều hướng bài tập">
+                <ul class="sidebar-project-nav" id="sidebar-project-nav" role="list">
+                  <!-- Injected by detailRenderer.js -->
+                </ul>
+              </nav>
+            </div>
+
+          </aside><!-- /detail-sidebar -->
+
+        </div><!-- /detail-grid -->
+      </div><!-- /detail-content -->
+
+      <!-- ── PREV / NEXT ── -->
+      <div class="detail-prevnext container" id="detail-prevnext">
+        <!-- Injected by detailRenderer.js -->
+      </div>
+
+    </main>
+
+    <!-- ── FOOTER ── -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-inner">
+          <p class="footer-text">
+            <span class="footer-mark" aria-hidden="true">✦</span>
+            Phạm Hữu Ngọc Minh &mdash; Hồ sơ học tập số &mdash;
+            <time datetime="2025">2026</time>
+          </p>
+          <p class="footer-course">Nhập môn Công nghệ số và Ứng dụng Trí tuệ nhân tạo</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- JS -->
+    <script type="module" src="js/detailRenderer.js"></script>
+
+  </body>
+</html>
